@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "create output dir",
+      "type": "shell",
+      "options": {
+        "statusbar": {
+          "hide": true
+        }
+      },
+      "command": "mkdir -p ${workspaceFolder}/${relativeFileDirname}/output",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "编译",
+      "options": {
+        "statusbar": {
+          "label": "$(terminal) 编译",
+          "color": "#33ff00"
+        }
+      },
+      "command": "g++",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${workspaceFolder}/${relativeFileDirname}/output/${fileBasenameNoExtension}"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "dependsOn": "create output dir"
+    },
+    {
+      "label": "运行",
+      "type": "shell",
+      "options": {
+        "statusbar": {
+          "label": "$(play) 运行",
+          "color": "#33ff00"
+        }
+      },
+      "command": "bash",
+      "args": [
+        "-c",
+        "time ${workspaceFolder}/${relativeFileDirname}/output/${fileBasenameNoExtension}"
+      ],
+      "dependsOn": [
+        "编译"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
