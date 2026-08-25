@@ -3,6 +3,34 @@
 #include<iomanip>
 
 using namespace std;
+namespace Color {
+    const std::string RESET = "\033[0m";
+    const std::string RED = "\033[41m";      // 红色背景
+    const std::string GREEN = "\033[42m";    // 绿色背景
+    const std::string YELLOW = "\033[43m";   // 黄色背景
+    const std::string BLUE = "\033[44m";     // 蓝色背景
+    const std::string WHITE = "\033[47m";    // 白色背景
+}
+
+// 获取数字对应的颜色
+std::string getColor(int num) {
+    switch(num) {
+        case 1: return Color::RED;
+        case 2: return Color::GREEN;
+        case 3: return Color::YELLOW;
+        case 4: return Color::BLUE;
+        default: return Color::WHITE;
+    }
+}
+
+void printColoredPattern(const std::vector<std::vector<int>>& matrix) {
+    for (const auto& row : matrix) {
+        for (int val : row) {
+            std::cout << getColor(val) << "  " << Color::RESET;
+        }
+        std::cout << std::endl;
+    }
+}
 
 void carpet_1(std::vector<std::vector<int>>& m, int px, int py){
     m[px+1][py]   = 1;
@@ -74,14 +102,8 @@ int main(){
     int y = _y - 1;
     int n = 1 << _n;
     std::vector<std::vector<int>> matrix(n, std::vector<int>(n, 0));
-    matrix[x][y] = 10;
-
     carpet(matrix, 0, 0, n, n, x, y);
-
-    // for(int i=0; i<n; ++i)
-    //     for(int j=0; j<n; ++j){
-    //        cout << setw(3) << matrix[i][j] << " ";
-    //        if(j == n-1) cout << endl;
-    //     }
+    // printColoredPattern(matrix);
+    
     return 0;
 }
