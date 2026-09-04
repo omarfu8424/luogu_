@@ -97,10 +97,6 @@ public:
     }
 };
 
-
-
-
-
 int main(){
     int n;  cin >> n;
     BIGINT p, pp;

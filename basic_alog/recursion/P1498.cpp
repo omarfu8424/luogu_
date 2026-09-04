@@ -94,7 +94,7 @@ int main(){
 
         for(int i = h; i < 2*h; ++i){
             for(int j = 0; j < w; ++j){
-                a[i-h][j+(w>>1)] = a[i][j];
+                a[i-h][j+h] = a[i][j];  // h == w/2
             }
         }
 
