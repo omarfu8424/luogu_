@@ -1,39 +1,57 @@
 #include<iostream>
+#include<queue>
+#include<vector>
 #include<algorithm>
-
 
 using namespace std;
 
+long long getMinHeap(queue<int>& q1, queue<int>& q2);
 int main(){
     int n;  cin >> n;
-    int mass[n];
+    vector<int> mass(n);
     for(int i = 0; i < n; ++i){
         cin >> mass[i];
     }
-    if(n < 2){cout << 0;  return 0;}
+    sort(mass.begin(), mass.end());
     
-    // n >= 2
-    sort(mass, mass+n);
-    int sum[n+1];
-    sum[0] = 1<<30;
-    sum[n] = 0;
-
-    for(int i = 0, index = 0; i < n-1;){
-        int massOf2 = mass[i]+mass[i+1];
-        if(massOf2 <= sum[index]+mass[i]){
-            sum[index] = massOf2;
-            sum[n] += sum[index];
-            i += 2;
-            index++;
-        }
-        else{
-            sum[index] = sum[index-1]+mass[i];
-            sum[n] += sum[index];
-            i++;
-            index++;
-        }
+    queue<int> q1, q2;
+    for(int i : mass){
+        q1.push(i);
     }
-    cout << sum[n];
+    
+    long long res = 0;
+    while(q1.size()+q2.size() > 1){
+        int m = getMinHeap(q1, q2);
+        int n = getMinHeap(q1, q2);
+        res += m+n;
+        q2.push(m+n);
+    }
+
+    cout << res;
 
     return 0;
+}
+
+long long getMinHeap(queue<int>& q1, queue<int>& q2){
+    long long res = 0;
+    if(q1.empty()){
+        res = q2.front();
+        q2.pop();
+        return res;
+    }
+    if(q2.empty()){
+        res = q1.front();
+        q1.pop();
+        return res;
+    }
+    if(q1.front() < q2.front()){
+        res = q1.front();
+        q1.pop();
+        return res;
+    }
+    else{
+        res = q2.front();
+        q2.pop();
+        return res;
+    }
 }
