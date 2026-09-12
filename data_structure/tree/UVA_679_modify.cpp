@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cstring>
-
+/*
+instead of computing each balls moving, we can focous on the last ball, whose parrity shows direction to go.
+in each level, the ball will meet a node. if I is a odd number,
+it will go left(the node with index 2k)and becoming the (I+1)/2 th ball in the left subtree
+*/
 using namespace std;
 int main(){
     int D, I;

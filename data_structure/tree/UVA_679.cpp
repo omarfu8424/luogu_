@@ -30,9 +30,10 @@ int main(){
                 if(flip[k] == 1){k = 2*k;}
                 else{k = 1+2*k;}
                 if(k > size){break;}
-            }            
+            }
+            printf("%d: %d\n", i, k/2);
         }
-        printf("%d\n", k/2);
     }
     return 0;
+
 }
