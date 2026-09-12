@@ -15,7 +15,7 @@
 using namespace std;
 int main(){
     int D, I;
-    int flip[1<<20]; //store switch data
+    int flip[1<<20]; //store switching data
 
     while(cin >> D >> I){
         memset(flip, 0, sizeof(int)*(1<<D));
@@ -34,4 +34,5 @@ int main(){
         }
         printf("%d\n", k/2);
     }
+    return 0;
 }
