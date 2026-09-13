@@ -1,5 +1,6 @@
-#ifndef __memoryPool_h__
-#define __memoryPool_h__
+#ifndef MEMORY_POOL_H
+#define MEMORY_POOL_H
+#include <cstddef>
 #include <queue>
 #include <vector>
 
@@ -27,6 +28,7 @@ public:
         return p;
     }
     void deallocate(T* p){
+        if(p == nullptr)    return;
         freeList_.push(p);
     }
 };
