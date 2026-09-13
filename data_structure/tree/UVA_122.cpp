@@ -60,13 +60,13 @@ void addNode(int value, char* way){
     for(int i = 0; way[i] != '\0'; ++i){
         if(way[i] == 'L'){
             if(p->left_ == nullptr){
-                p->left_ = new Node();
+                p->left_ = pool.allocate();
             }
             p = p->left_;
         }
         else if(way[i] == 'R'){
             if(p->right_ == nullptr){
-                p->right_ = new Node();
+                p->right_ = pool.allocate();
             }
             p = p->right_;            
         }
