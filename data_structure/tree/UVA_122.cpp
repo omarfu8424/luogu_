@@ -3,6 +3,8 @@
 #include<cstring>
 #include<queue>
 #include<vector>
+#include "../../_tool/memoryPool.h"
+
 #define MAXN 256
 using namespace std;
 
@@ -10,6 +12,7 @@ struct Node;
 char in[MAXN];
 Node* root = nullptr;
 bool failed = false;
+memoryPool<Node, MAXN> pool;
 
 struct Node{
     bool hasValue_ = false;
@@ -23,12 +26,12 @@ void freeNode(Node* n){
         if(n == nullptr) return;    //reaching leaf-node
         freeNode(n->left_);
         freeNode(n->right_);
-        delete n;
+        pool.deallocate(n);
     }
 void addNode(int value, char* way);
 bool readInput(){
     failed = false;
-    root = new Node();
+    root = pool.allocate();
     for(;;){
         if(scanf("%s", in) != 1)    return false;
         if(strcmp(in, "()") == 0)    break;
