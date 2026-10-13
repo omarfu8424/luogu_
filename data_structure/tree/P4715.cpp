@@ -15,14 +15,22 @@ bool cmp(const node& a, const node& b){
 
 int main(){
     int n; cin >> n;
-    vector<node> v(1<<n);
+    vector<node> v1(1<<(n-1));
+    vector<node> v2(1<<(n-1));
     int index = 1;
-    for(auto& i: v){
+    for(auto& i: v1){
+        i.country = index++;
+        cin >> i.power;
+    }
+    for(auto& i: v2){
         i.country = index++;
         cin >> i.power;
     }
 
-    sort(v.begin(), v.end(), cmp);
-    cout << v[v.size()/2-1].country;
+    sort(v1.begin(), v1.end(), cmp);
+    sort(v2.begin(), v2.end(), cmp);
+
+    int second = v1.back().power < v2.back().power? v1.back().country: v2.back().country;
+    cout << second;
     return 0;
 }
